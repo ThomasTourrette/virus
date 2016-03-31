@@ -14,5 +14,8 @@ QT += widgets printsupport
 
 
 # Input
-HEADERS += include/ui/interface.hpp
-SOURCES += src/ui/interface.cpp src/ui/test.cpp
+HEADERS +=  include/ui/interface.hpp\
+            include/ui/newWindow.hpp
+SOURCES +=  src/ui/interface.cpp\
+            src/ui/newWindow.cpp\
+            src/ui/test.cpp 

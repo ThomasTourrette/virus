@@ -1,14 +1,27 @@
-#include "../include/ui/interface.hpp"
+#include "../../include/ui/interface.hpp"
+#include "../../include/ui/newWindow.hpp"
+
+using namespace std;
 
 Interface::Interface() : QMainWindow(){
-    window = new QWidget;
+    mainWidget = new QWidget;
+    registerWidget = new QWidget;
+    stackedWidget = new QStackedWidget;
+
     mainLayout = new QVBoxLayout;
+    registerLayout = new QVBoxLayout;
 
     editLogin = new QLineEdit;
     editPassword = new QLineEdit;
     login = new QPushButton("login");
     registr = new QPushButton("register");
     quit = new QPushButton("quit");
+    
+    registerEditLogin = new QLineEdit;
+    registerEditPassword = new QLineEdit;
+    registerEditPasswordAgain = new QLineEdit;
+    valid = new QPushButton("valid");
+    retrn = new QPushButton("return");
 
 
     mainLayout->addWidget(editLogin);
@@ -16,10 +29,38 @@ Interface::Interface() : QMainWindow(){
     mainLayout->addWidget(login);
     mainLayout->addWidget(registr);
     mainLayout->addWidget(quit);
+
+
+    registerLayout->addWidget(registerEditLogin);
+    registerLayout->addWidget(registerEditPassword);
+    registerLayout->addWidget(registerEditPasswordAgain);
+    registerLayout->addWidget(valid);
+    registerLayout->addWidget(retrn);
+
+    mainWidget->setLayout(mainLayout);
+    registerWidget->setLayout(registerLayout);
+
+    stackedWidget->addWidget(mainWidget);
+    stackedWidget->addWidget(registerWidget);
+    
     QObject::connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
+    QObject::connect(registr, SIGNAL(clicked()), this, SLOT(openRegisterWidget()));
+    QObject::connect(retrn, SIGNAL(clicked()), this, SLOT(openMainWidget()));
 
-    window->setLayout(mainLayout);
 
-    setCentralWidget(window);
+    
+    
+    setCentralWidget(stackedWidget);
     setWindowTitle(tr("virus"));
 }
+
+void Interface::openRegisterWidget(){
+    cout << "register button clicked !" << endl;
+    stackedWidget->setCurrentWidget(registerWidget);
+}
+
+void Interface::openMainWidget(){
+    cout << "register button clicked !" << endl;
+    stackedWidget->setCurrentWidget(mainWidget);
+}
+

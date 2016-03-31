@@ -49,10 +49,14 @@ OBJECTS_DIR   = obj/
 ####### Files
 
 SOURCES       = src/ui/interface.cpp \
-		src/ui/test.cpp temp/moc_interface.cpp
+		src/ui/newWindow.cpp \
+		src/ui/test.cpp temp/moc_interface.cpp \
+		temp/moc_newWindow.cpp
 OBJECTS       = obj/interface.o \
+		obj/newWindow.o \
 		obj/test.o \
-		obj/moc_interface.o
+		obj/moc_interface.o \
+		obj/moc_newWindow.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -144,7 +148,9 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		login_test.pro include/ui/interface.hpp src/ui/interface.cpp \
+		login_test.pro include/ui/interface.hpp \
+		include/ui/newWindow.hpp src/ui/interface.cpp \
+		src/ui/newWindow.cpp \
 		src/ui/test.cpp
 QMAKE_TARGET  = login_test
 DESTDIR       = bin/#avoid trailing-slash linebreak
@@ -384,8 +390,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents include/ui/interface.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/ui/interface.cpp src/ui/test.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents include/ui/interface.hpp include/ui/newWindow.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/ui/interface.cpp src/ui/newWindow.cpp src/ui/test.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -408,11 +414,15 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: temp/moc_interface.cpp
+compiler_moc_header_make_all: temp/moc_interface.cpp temp/moc_newWindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) temp/moc_interface.cpp
-temp/moc_interface.cpp: include/ui/interface.hpp
+	-$(DEL_FILE) temp/moc_interface.cpp temp/moc_newWindow.cpp
+temp/moc_interface.cpp: include/ui/newWindow.hpp \
+		include/ui/interface.hpp
 	/usr/lib/qt/bin/moc $(DEFINES) -I/usr/lib/qt/mkspecs/linux-g++ -I/home/thomas/projets/jeudecartes/client/login_test -I/home/thomas/projets/jeudecartes/client/login_test -I/usr/include/qt -I/usr/include/qt/QtPrintSupport -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/5.3.0 -I/usr/include/c++/5.3.0/x86_64-unknown-linux-gnu -I/usr/include/c++/5.3.0/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include-fixed -I/usr/include include/ui/interface.hpp -o temp/moc_interface.cpp
+
+temp/moc_newWindow.cpp: include/ui/newWindow.hpp
+	/usr/lib/qt/bin/moc $(DEFINES) -I/usr/lib/qt/mkspecs/linux-g++ -I/home/thomas/projets/jeudecartes/client/login_test -I/home/thomas/projets/jeudecartes/client/login_test -I/usr/include/qt -I/usr/include/qt/QtPrintSupport -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/5.3.0 -I/usr/include/c++/5.3.0/x86_64-unknown-linux-gnu -I/usr/include/c++/5.3.0/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include-fixed -I/usr/include include/ui/newWindow.hpp -o temp/moc_newWindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -428,14 +438,22 @@ compiler_clean: compiler_moc_header_clean
 
 ####### Compile
 
-obj/interface.o: src/ui/interface.cpp 
+obj/interface.o: src/ui/interface.cpp include/ui/interface.hpp \
+		include/ui/newWindow.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/interface.o src/ui/interface.cpp
 
-obj/test.o: src/ui/test.cpp 
+obj/newWindow.o: src/ui/newWindow.cpp include/ui/newWindow.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/newWindow.o src/ui/newWindow.cpp
+
+obj/test.o: src/ui/test.cpp include/ui/interface.hpp \
+		include/ui/newWindow.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/test.o src/ui/test.cpp
 
 obj/moc_interface.o: temp/moc_interface.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_interface.o temp/moc_interface.cpp
+
+obj/moc_newWindow.o: temp/moc_newWindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_newWindow.o temp/moc_newWindow.cpp
 
 ####### Install
 
