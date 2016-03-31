@@ -4,18 +4,18 @@
 
 TEMPLATE = app
 TARGET = login_test
-INCLUDEPATH += .
+INCLUDEPATH += ../../include 
 
-DESTDIR = bin
-OBJECTS_DIR = obj/
-MOC_DIR = temp/
+DESTDIR = ../../bin
+OBJECTS_DIR = ../..obj
+MOC_DIR = ../../temp
 
 QT += widgets printsupport
 
 
 # Input
-HEADERS +=  include/ui/interface.hpp\
-            include/ui/newWindow.hpp
-SOURCES +=  src/ui/interface.cpp\
-            src/ui/newWindow.cpp\
-            src/ui/test.cpp 
+HEADERS +=  ../../include/ui/interface.hpp\
+            ../../include/ui/newWindow.hpp
+SOURCES +=  interface.cpp\
+            newWindow.cpp\
+            test.cpp 
