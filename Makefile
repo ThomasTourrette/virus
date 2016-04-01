@@ -9,7 +9,7 @@ OBJDIR = obj
 TEMPDIR = temp
 
 UI = $(SRCDIR)/ui
-DATABASECONNECTION = $(SRCDIR)/dataBaseConnection
+DATABASECONNECTION = $(SRCDIR)/databaseConnection
 
 MYTARGET = $(UI) $(DATABASECONNECTION) 
 

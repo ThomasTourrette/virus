@@ -7,7 +7,7 @@ TARGET = login_test
 INCLUDEPATH += ../../include 
 
 DESTDIR = ../../bin
-OBJECTS_DIR = ../..obj
+OBJECTS_DIR = ../../obj
 MOC_DIR = ../../temp
 
 QT += widgets printsupport

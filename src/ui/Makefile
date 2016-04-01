@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = login_test1.0.0
-DISTDIR = /home/thomas/projets/jeudecartes/client/login_test/src/..obj/login_test1.0.0
+DISTDIR = /home/thomas/projets/jeudecartes/client/login_test/obj/login_test1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-O1,--sort-common,--as-needed,-z,relro
 LIBS          = $(SUBLIBS) -lQt5PrintSupport -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -44,7 +44,7 @@ STRIP         = strip
 
 ####### Output directory
 
-OBJECTS_DIR   = ../..obj/
+OBJECTS_DIR   = ../../obj/
 
 ####### Files
 
@@ -52,11 +52,11 @@ SOURCES       = interface.cpp \
 		newWindow.cpp \
 		test.cpp ../../temp/moc_interface.cpp \
 		../../temp/moc_newWindow.cpp
-OBJECTS       = ../..obj/interface.o \
-		../..obj/newWindow.o \
-		../..obj/test.o \
-		../..obj/moc_interface.o \
-		../..obj/moc_newWindow.o
+OBJECTS       = ../../obj/interface.o \
+		../../obj/newWindow.o \
+		../../obj/test.o \
+		../../obj/moc_interface.o \
+		../../obj/moc_newWindow.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -438,22 +438,22 @@ compiler_clean: compiler_moc_header_clean
 
 ####### Compile
 
-../..obj/interface.o: interface.cpp ../../include/ui/interface.hpp \
+../../obj/interface.o: interface.cpp ../../include/ui/interface.hpp \
 		../../include/ui/newWindow.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../..obj/interface.o interface.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../obj/interface.o interface.cpp
 
-../..obj/newWindow.o: newWindow.cpp ../../include/ui/newWindow.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../..obj/newWindow.o newWindow.cpp
+../../obj/newWindow.o: newWindow.cpp ../../include/ui/newWindow.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../obj/newWindow.o newWindow.cpp
 
-../..obj/test.o: test.cpp ../../include/ui/interface.hpp \
+../../obj/test.o: test.cpp ../../include/ui/interface.hpp \
 		../../include/ui/newWindow.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../..obj/test.o test.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../obj/test.o test.cpp
 
-../..obj/moc_interface.o: ../../temp/moc_interface.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../..obj/moc_interface.o ../../temp/moc_interface.cpp
+../../obj/moc_interface.o: ../../temp/moc_interface.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../obj/moc_interface.o ../../temp/moc_interface.cpp
 
-../..obj/moc_newWindow.o: ../../temp/moc_newWindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../..obj/moc_newWindow.o ../../temp/moc_newWindow.cpp
+../../obj/moc_newWindow.o: ../../temp/moc_newWindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../obj/moc_newWindow.o ../../temp/moc_newWindow.cpp
 
 ####### Install
 
