@@ -1,7 +1,9 @@
 #include "../../include/ui/interface.hpp"
 #include "../../include/ui/newWindow.hpp"
+#include "../../include/databaseConnection/test_connection.hpp"
 
 using namespace std;
+using namespace pqxx;
 
 Interface::Interface() : QMainWindow(){
     mainWidget = new QWidget;
@@ -46,12 +48,26 @@ Interface::Interface() : QMainWindow(){
     QObject::connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
     QObject::connect(registr, SIGNAL(clicked()), this, SLOT(openRegisterWidget()));
     QObject::connect(retrn, SIGNAL(clicked()), this, SLOT(openMainWidget()));
+    QObject::connect(login, SIGNAL(clicked()), this, SLOT(dbConnection()));
+    QObject::connect(valid, SIGNAL(clicked()), this, SLOT(registerRequest()));
 
 
+    dbConnection();
     
     
     setCentralWidget(stackedWidget);
     setWindowTitle(tr("virus"));
+}
+
+void Interface::dbConnection(){
+    testConnection = new TestConnection;
+    testConnection->databaseConnection();
+    testConnection->sendSqlRequest("SELECT * from person;");
+}
+
+void Interface::registerRequest(){
+    testConnection->sendSqlRequest("INSERT INTO person VALUES ('vincent', 'mignolet', 28)");
+    cout << "registerRequest" << endl;
 }
 
 void Interface::openRegisterWidget(){

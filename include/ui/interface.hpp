@@ -11,6 +11,7 @@
 #include <QLineEdit>
 #include <QStackedWidget>
 #include "newWindow.hpp"
+#include "../../include/databaseConnection/test_connection.hpp"
 
 
 class Interface : public QMainWindow{
@@ -20,6 +21,8 @@ class Interface : public QMainWindow{
     public slots:
         void openRegisterWidget();
         void openMainWidget();
+        void dbConnection();
+        void registerRequest();
     private:
         QWidget* mainWidget;
         QWidget* registerWidget;
@@ -41,6 +44,8 @@ class Interface : public QMainWindow{
         QPushButton* retrn;
 
         NewWindow* myNewWindow;
+
+        TestConnection *testConnection;
 
 };
 

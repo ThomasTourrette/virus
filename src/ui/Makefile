@@ -36,7 +36,7 @@ DISTNAME      = login_test1.0.0
 DISTDIR = /home/thomas/projets/jeudecartes/client/login_test/obj/login_test1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-O1,--sort-common,--as-needed,-z,relro
-LIBS          = $(SUBLIBS) -lQt5PrintSupport -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L../../lib -ltestconnection -lpqxx -lpq -lQt5PrintSupport -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -439,7 +439,8 @@ compiler_clean: compiler_moc_header_clean
 ####### Compile
 
 ../../obj/interface.o: interface.cpp ../../include/ui/interface.hpp \
-		../../include/ui/newWindow.hpp
+		../../include/ui/newWindow.hpp \
+		../../include/databaseConnection/test_connection.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../obj/interface.o interface.cpp
 
 ../../obj/newWindow.o: newWindow.cpp ../../include/ui/newWindow.hpp

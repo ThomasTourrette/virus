@@ -9,6 +9,7 @@ INCLUDEPATH += ../../include
 DESTDIR = ../../bin
 OBJECTS_DIR = ../../obj
 MOC_DIR = ../../temp
+LIBS += -L../../lib -ltestconnection -lpqxx -lpq
 
 QT += widgets printsupport
 
