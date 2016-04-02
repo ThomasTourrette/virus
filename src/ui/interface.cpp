@@ -52,16 +52,15 @@ Interface::Interface() : QMainWindow(){
     QObject::connect(valid, SIGNAL(clicked()), this, SLOT(registerRequest()));
 
 
-    dbConnection();
     
+    testConnection = new TestConnection;
+    testConnection->databaseConnection();
     
     setCentralWidget(stackedWidget);
     setWindowTitle(tr("virus"));
 }
 
 void Interface::dbConnection(){
-    testConnection = new TestConnection;
-    testConnection->databaseConnection();
     testConnection->sendSqlRequest("SELECT * from person;");
 }
 

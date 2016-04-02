@@ -7,9 +7,9 @@ int TestConnection::databaseConnection(){
     C = new connection("dbname=myFirstDatabase user=thomas password= \
             hostaddr=127.0.0.1 port=5432");
     if (C->is_open()){
-        cout << "data base open " << C->dbname() << endl;
+        cout << "data base opened " << C->dbname() << endl;
     } else{
-        cout << "cant oppen database" << endl;
+        cout << "cant open database" << endl;
         return 1;
     }
     return 0;
