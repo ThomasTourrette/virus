@@ -91,6 +91,7 @@ void Interface::connectionRequest(){
 }
 
 void Interface::registerRequest(){
+    int validLogin;
     QString l = registerEditLogin->text();
     QString p = registerEditPassword->text();
     QString pAgain = registerEditPasswordAgain->text();
@@ -100,10 +101,20 @@ void Interface::registerRequest(){
         cout << "error: passwords doesn't match" << endl;
         return;
     }
-    string request = "INSERT INTO registration(login, password) VALUES ('" + l.toStdString()
+
+    string validLoginRequest = "SELECT count(1) from registration where login = '"
+            + l.toStdString() +"'";
+
+    validLogin = testConnection->sendSqlRequest(validLoginRequest.c_str());
+    if (validLogin) {
+        cout << "login already registered" << endl;
+        return;
+    }
+    else {
+        string request = "INSERT INTO registration(login, password) VALUES ('" + l.toStdString()
         + "', '" + p.toStdString() + "')";
-    //testConnection->sendSqlRequest("INSERT INTO person VALUES ('vincent', 'mignolet', 28)");
-    testConnection->sendSqlRequest(request.c_str());
+        testConnection->sendSqlRequest(request.c_str());
+    }
     
 
 }
