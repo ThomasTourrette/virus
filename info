@@ -1,0 +1,9 @@
+to open postgresql database:
+psql databaseName
+
+to list table in database:
+\d
+
+
+to show column in a particular table:
+\d+ tableName

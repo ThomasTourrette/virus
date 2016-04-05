@@ -4,5 +4,7 @@ verify that the field is not already in database
 
 test login
 
+disable register button when QLineEdit are void.
+
 test secure login with some data sent to the client. the data is mixed with the password and transform with sha1.
 the result is sent back to the server and compared with the value stored in the server.

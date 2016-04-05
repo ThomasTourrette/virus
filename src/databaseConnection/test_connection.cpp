@@ -4,7 +4,7 @@ using namespace std;
 using namespace pqxx;
 
 int TestConnection::databaseConnection(){
-    C = new connection("dbname=myFirstDatabase user=thomas password= \
+    C = new connection("dbname=virus user=thomas password= \
             hostaddr=127.0.0.1 port=5432");
     if (C->is_open()){
         cout << "data base opened " << C->dbname() << endl;
@@ -16,15 +16,17 @@ int TestConnection::databaseConnection(){
 }
 
 int TestConnection::sendSqlRequest(const char *sqlRequest){
+    int res;
     connection &Cr = *C;
     nontransaction N(Cr);
     result R(N.exec(sqlRequest));
 
     for (auto s : R){
-        cout << "nom " << s[0].as<string>() << endl;
-        cout << "prenom " << s[1].as<string>() << endl;
-        cout << "age " << s[2].as<int>() << endl;
+        for (auto field : s){
+            res = field.as<int>(); 
+            cout << "field " << res << endl;
+        }
     }
-    return 0;
+    return res; 
 }
 

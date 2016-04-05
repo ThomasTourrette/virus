@@ -14,6 +14,7 @@
 #include "../../include/databaseConnection/test_connection.hpp"
 
 
+
 class Interface : public QMainWindow{
     Q_OBJECT;
     public:
@@ -21,15 +22,17 @@ class Interface : public QMainWindow{
     public slots:
         void openRegisterWidget();
         void openMainWidget();
-        void dbConnection();
+        void connectionRequest();
         void registerRequest();
     private:
         QWidget* mainWidget;
         QWidget* registerWidget;
+        QWidget* lobbyWidget;
 
         QStackedWidget* stackedWidget;
 
         QVBoxLayout* mainLayout;
+        QVBoxLayout* lobbyLayout;
         QLineEdit* editLogin;
         QLineEdit* editPassword;
         QPushButton* login; 
@@ -42,6 +45,8 @@ class Interface : public QMainWindow{
         QLineEdit* registerEditPasswordAgain;
         QPushButton* valid;
         QPushButton* retrn;
+
+        QPushButton* createGame;
 
         NewWindow* myNewWindow;
 
